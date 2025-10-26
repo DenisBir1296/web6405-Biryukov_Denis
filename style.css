@@ -72,8 +72,6 @@ main {
 }
 
 .planet {
-    /*background: rgba(255, 255, 255, 0.1);*/
-    border-radius: 15px;
     padding: 2rem;
     text-align: center;
     display: grid;
@@ -162,24 +160,4 @@ main {
 .info h2 {
     color: #f0c420;
     margin-bottom: 1rem;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .planet-info {
-        grid-template-columns: 1fr;
-    }
-    
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    main {
-        padding: 1rem;
-    }
 }
