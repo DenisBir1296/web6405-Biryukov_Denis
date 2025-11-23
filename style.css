@@ -1,4 +1,15 @@
 * {
+	--main-color: #1a1a4a;
+	--font-color: white;
+	--heading-color: #f0c420;
+	--btn-nav-act-color: #f0c420;
+	--btn-color: #f0c420;
+	--btn-hover-color: #d4b01c;
+	--list-line-color: rgba(255,255,255,0.15);
+	--login-container-color: white;
+	--form-control-color: #e1e5e9;
+
+
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,38 +19,50 @@
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    color: #ffffff;
-    background: #1a1a4a;
-    min-height: 100vh;
+    color: var(--font-color);
+    background: var(--main-color);
 }
 
 /* Шапка и навигация */
 header {
-    background-color: rgba(0, 0, 0, 1.0);
-    padding: 25px;
+    background-color: black;
+    padding: 15px;
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
+nav{
+	display: flex;
+	justify-content: space-between;
+	
+	div {
+		list-style: none;
+		display: flex;
+		gap: 2rem;
+	}
+	
+	h3 {
+		margin-left: 10px;
+	}
+	
+	a {
+		color: var(--font-color);
+		text-decoration: none;
+		padding: 0.3rem 1rem;
+		border-radius: 5px;
+		
+		&:hover, &.active {
+			background-color: var(--btn-nav-act-color);
+			color: black;
+		}
+		
+		&.sign_in{
+			
+		}
+	}
 }
 
-nav a {
-    color: #ffffff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-}
-
-nav a:hover, nav a.active {
-    background-color: #f0c420;
-    color: #000000;
-}
 
 /* Основной контент */
 main {
@@ -51,22 +74,23 @@ main {
 /* Главная страница */
 .hero {
     text-align: center;
+    
+	h1 {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+		color: var(--heading-color);
+	}
+	
+	p {
+		font-size: 1.2rem;
+		opacity: 0.9;
+	}
 }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #f0c420;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
-
+/* Список планет на главное странице */
 .planets-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     margin: 3rem 0;
 }
@@ -75,33 +99,38 @@ main {
     padding: 2rem;
     text-align: center;
     display: grid;
-}
-
-.planet img {
-    margin: 0px auto 2rem;
-    width: 20em;
-    height: 20em;
-    object-fit: cover;
-}
-
-.planet a {
-    margin: 0px auto 1.5rem;
-    width: 10rem;
+    
+	img {
+		margin: 0px auto 2rem;
+		width: 20em;
+		height: 20em;
+		object-fit: cover;
+		transition: 1s; /* Время эффекта */
+		
+		&:hover {
+			transform: scale(1.1); /* Увеличиваем масштаб */
+		}
+	}
+	
+	a {
+		margin: 0px auto 1.5rem;
+		width: 10rem;
+	}
 }
 
 /* Кнопки */
 .btn {
     display: inline-block;
-    background-color: #f0c420;
-    color: #000000;
+    background-color: var(--btn-color);
+    color: black;
     padding: 0.8rem 1.5rem;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-}
-
-.btn:hover {
-    background-color: #d4b01c;
+    
+    &:hover {
+		background-color: var(--btn-hover-color);
+	}
 }
 
 /* Страницы планет */
@@ -111,38 +140,47 @@ main {
     gap: 3rem;
     align-items: start;
     margin: 3rem 0;
+    
+    img {
+		width: 100%;
+		border-radius: 15px;
+		transition: 1s; /* Время эффекта */
+		
+		&:hover {
+			transform: scale(1.1); /* Увеличиваем масштаб */
+		}
+	}
 }
 
-.planet-image img {
-    width: 100%;
-    border-radius: 15px;
+.planet-details {
+	h2 {
+		color: var(--heading-color);
+		margin-bottom: 1.5rem;
+	}
+
+	ul {
+		list-style: none;
+		margin-bottom: 2rem;
+	}
+	
+	li {
+		padding: 0.5rem 0;
+		border-bottom: 1px solid var(--list-line-color);
+	}
 }
 
-.planet-details h2 {
-    color: #f0c420;
-    margin-bottom: 1.5rem;
-}
-
-.planet-details ul {
-    list-style: none;
-    margin-bottom: 2rem;
-}
-
-.planet-details li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-}
-
-.facts li {
-    padding-left: 1rem;
-    position: relative;
-}
-
-.facts li::before {
-    content: "★";
-    color: #f0c420;
-    position: absolute;
-    left: 0;
+.facts {
+	li {
+		padding-left: 1rem;
+		position: relative;
+		
+		&::before {
+			content: "★";
+			color: var(--heading-color);
+			position: absolute;
+			left: 0;
+		}
+	}
 }
 
 .back-link {
@@ -155,9 +193,73 @@ main {
     padding: 2rem;
     border-radius: 15px;
     margin: 3rem 0;
+
+	h2 {
+		color: var(--heading-color);
+		margin-bottom: 1rem;
+	}
 }
 
-.info h2 {
-    color: #f0c420;
-    margin-bottom: 1rem;
+/* Страница для логина */
+.signin-main {
+	min-height: 85vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
+        
+ .login-container {
+	border-radius: 15px;
+	background: var(--login-container-color);
+	padding: 40px;
+	min-width: 450px;
+	color: var(--main-color);
+}
+
+.form-group {
+	margin-top: 5px;
+	margin-bottom: 25px;
+	
+	input{
+		width: 100%;
+		padding: 15px;
+		border: 2px solid var(--form-control-color);
+		border-radius: 8px;
+		font-size: 1rem;
+	}
+
+	label {
+		color: var(--main-color);
+		font-size: 1rem;
+        }
+}
+
+.checkbox-group {
+	display: flex;
+	margin-bottom: 30px;
+
+	input {
+		width: 18px;
+		height: 18px;
+		margin-right: 10px;
+		accent-color: var(--btn-color);
+	}
+
+	label {
+		font-size: 0.9rem;
+		cursor: pointer;
+	}
+}
+
+.btn-login {
+	width: 100%;
+	padding: 15px;
+	background: var(--main-color);
+	color: white;
+	border-radius: 8px;
+	font-size: 1.2rem;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+
