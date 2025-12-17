@@ -56,10 +56,6 @@ nav{
 			background-color: var(--btn-nav-act-color);
 			color: black;
 		}
-		
-		&.sign_in{
-			
-		}
 	}
 }
 
@@ -214,15 +210,46 @@ main {
 	input{
 		width: 100%;
 		padding: 15px;
-		border: 2px solid var(--form-control-color);
+		border: 2px solid;
+		border-color: var(--form-control-color);
 		border-radius: 8px;
 		font-size: 1rem;
+		
+		&:focus {
+			outline: none; /* Убирает обводку при фокусе */
+		}
+		
+		/* Стили для разных состояний */
+        &.good {
+            border-color: green;
+        }
+        
+        &.bad {
+            border-color: red;
+        }
 	}
 
 	label {
 		color: var(--main-color);
 		font-size: 1rem;
+	}
+	
+	div {
+	/* Стили для подсказок */
+        &.hint {
+            font-size: 0.9rem;
+            margin-top: 5px;
+            min-height: 20px;
         }
+        
+        &.good-hint {
+            color: green;
+        }
+        
+        &.bad-hint {
+            color: red;
+        }
+     }
 }
 
 .checkbox-group {
@@ -251,6 +278,36 @@ main {
 	font-size: 1.2rem;
 	font-weight: bold;
 	text-transform: uppercase;
+	opacity: 1.0;
+		
+	&:disabled {
+		opacity: 0.4;
+	}
+}
+
+.userlist {
+	width: 100%; 
+	margin: 8% 0px auto;
+	
+	table {
+		table-layout: fixed;
+		width: 35rem;
+		border-collapse: collapse;
+		
+		th {
+			color: var(--heading-color);
+		}
+		
+		tr, td {
+			padding: 0.2rem;
+			border: 2px solid var(--list-line-color);
+		}
+	}
+	
+	h2 {
+		color: var(--heading-color);
+		margin-bottom: 1rem;
+	}
 }
 
 
