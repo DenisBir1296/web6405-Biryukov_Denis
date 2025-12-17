@@ -56,10 +56,6 @@ nav{
 			background-color: var(--btn-nav-act-color);
 			color: black;
 		}
-		
-		&.sign_in{
-			
-		}
 	}
 }
 
@@ -286,6 +282,31 @@ main {
 		
 	&:disabled {
 		opacity: 0.4;
+	}
+}
+
+.userlist {
+	width: 100%; 
+	margin: 8% 0px auto;
+	
+	table {
+		table-layout: fixed;
+		width: 35rem;
+		border-collapse: collapse;
+		
+		th {
+			color: var(--heading-color);
+		}
+		
+		tr, td {
+			padding: 0.2rem;
+			border: 2px solid var(--list-line-color);
+		}
+	}
+	
+	h2 {
+		color: var(--heading-color);
+		margin-bottom: 1rem;
 	}
 }
 

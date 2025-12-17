@@ -1,14 +1,17 @@
 {
-    "/home": {
-        "get": {
-            "data": [
-                {"id":1,"name": "Steve"}
-            ]
-        },
+    "/post": {
         "post": {
             "data": [
                 {"id":1,"name": "Steve French"}
             ]
         }
+    },
+    
+    "/users": {
+        "get": [
+                {"login": "denis", "email": "denis@mail.ru"},
+                {"login": "Ivan100500", "email": "ivanivan100500@gmail.ru"},
+                {"login": "cat5573", "email": "cat@mail.ru"}
+		]
     }
 }

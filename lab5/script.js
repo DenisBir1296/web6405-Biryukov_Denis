@@ -6,17 +6,6 @@ class Data {
         this.remember = remember;
     }
     
-    async send(url){
-		const response = await fetch(url, {
-			method: 'POST',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(this)})
-		
-		if (!response.ok) {
-			console.log('Ошибка при отправке данных: ' + error.message);
-		}
-	}
-    
     print() {
 		console.log(`Логин: ${this.login}`);
 		console.log(`Пароль: ${this.passwd}`);
@@ -69,17 +58,19 @@ passwordInput.addEventListener('input', function() {
 	const password = this.value;
 	const hint = document.getElementById('passwordHint');
             
-            
+    // Поле пустое      
 	if (password.length === 0) {
 		fields.password = false;
 		this.className = 'bad';
 		hint.textContent = 'Введите пароль';
 		hint.className = 'hint bad-hint';
+	// Слишком короткое
 	} else if (password.length < 8) {
 		fields.password = false;
 		this.className = 'bad';
 		hint.textContent = 'Пароль должен быть не менее 8 символов';
 		hint.className = 'hint bad-hint';
+	// Все хорошо
 	} else {
 		fields.password = true;
 		this.className = 'good';
@@ -104,15 +95,60 @@ function checkAllFields() {
 }
 
 // Отправка данных
-submitBtn.addEventListener('click', function(e){
+submitBtn.addEventListener('click', async function(e){
 	
-	let username = loginInput.value;
-	let password = passwordInput.value;
-	let remember = rememberInput.checked;
-	
-	let d = new Data(username, password, remember);
-	d.print()
-	d.send('http://127.0.0.1:8000/home')
+	try{
+		let username = loginInput.value;
+		let password = passwordInput.value;
+		let remember = rememberInput.checked;
+		
+		let d = new Data(username, password, remember);
+		d.print()
+		
+		// выполняем запрос 
+		e.preventDefault()
+		const response = await fetch('http://127.0.0.1:8000/post', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			//mode: 'no-cors', // Ограниченный режим
+			body: JSON.stringify(d)
+		});
+		
+		// выводим результаты ответа
+		//console.log(response)
+		
+		// проверяем что запрос прошел успешно
+		if (!response.ok) {
+			throw new Error(`HTTP ошибка! Статус: ${response.status}`);
+		}
+		
+		// получаем ответ от сервера
+		resjson = await response.json()
+		//console.log(resjson);
+		
+		// проверяем корректность обработки
+		if (!resjson.status) {
+			throw new Error('Ошибка на сервере');
+		}
+		
+		// проверяем существует ли уже такой пользователь
+		if(resjson.isExist){
+			// выводим ошибку если существует
+			const hint = document.getElementById('usernameHint');
+			fields.username = false;
+			loginInput.className = 'bad';
+			hint.textContent = 'Пользователь уже существует';
+			hint.className = 'hint bad-hint';
+			
+		} else {
+			//перенаправляем
+			window.location.href = 'account.html'
+		}
+		
+	} catch (error) {
+		alert('Ошибка!');
+		console.log(error);
+	}
 })
 
 
